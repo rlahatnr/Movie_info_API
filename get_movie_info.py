@@ -4,7 +4,7 @@ from Movie_info.models import Movie_data_list
 
 def get_info():
     databox = []
-    for n in range(1, 10):
+    for n in range(1, 11):
         res = requests.get(f'https://yts.mx/api/v2/list_movies.json?limit=10&page={n}').json()
         movie_data = res['data']['movies']
         for i in movie_data:
