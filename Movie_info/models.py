@@ -16,3 +16,11 @@ class Movie_data_list(models.Model):
     rating = models.FloatField()
     genres = models.CharField(max_length=500)
     summary = models.CharField(max_length=3000)
+
+
+class New_movie(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    title = models.CharField(max_length=500)
+    year = models.IntegerField()
+    genres = models.CharField(max_length=500)
+    summary = models.CharField(max_length=3000)

@@ -1,8 +1,7 @@
-from django.http import HttpResponse
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from .models import Movie_data_list
 from django.core.paginator import Paginator
-from django.shortcuts import render
-from django.db.models import Q
+from .forms import Input_new_form
 from .filter import SortFilter
 
 
@@ -21,3 +20,19 @@ def movie_list(request):
 
     context = {'data': page_obj, 'page': page, 'filter':filter}
     return render(request, 'Movie_info/movie_list.html', context)
+
+def movie_detail(request, id):
+    data = Movie_data_list.objects.filter(id=id)
+    context={'data':data}
+    return render(request, 'Movie_info/movie_detail.html', context)
+
+def input_movie(request):
+    if request.method == 'POST':
+        form = Input_new_form(request.POST)
+        if form.is_valid():
+            data = form.save()
+            return HttpResponseRedirect('movie_list/%i' % data.id)
+    else:
+        form = Input_new_form()
+    context = {'form': form}
+    return render(request, 'Movie_info/new_movie.html', context)

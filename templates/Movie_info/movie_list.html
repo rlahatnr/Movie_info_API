@@ -11,7 +11,7 @@
             <button class="btn btn-primary" type="submit">필터링</button>
         </form>
     </div>
-
+    <br>
     <div class="row">
         <table class="table">
             <thead>
@@ -29,11 +29,13 @@
                     {% for i in data %}
                         <tr>
                             <td>{{i.id}}</td>
-                            <td>{{i.title}}</td>
+                            <td>
+                                <a href="{% url 'movie_info:detail' i.id %}">{{i.title|truncatechars:30}}</a>
+                            </td>
                             <td>{{i.year}}</td>
                             <td>{{i.rating}}</td>
                             <td>{{i.genres}}</td>
-                            <td>{{i.summary}}</td>
+                            <td>{{i.summary|truncatechars:40}}</td>
                         </tr>
                     {% endfor %}
                 {% else %}
